@@ -1,5 +1,7 @@
 # Level Finance v2 - Trading contracts
 
+[![test](https://github.com/level-fi/v2-trading-contracts/actions/workflows/test.yml/badge.svg)](https://github.com/level-fi/v2-trading-contracts/actions/workflows/test.yml)
+
 Level V2 concentrade on optimizing contract code readability and gas usage. We extract business logic to number of small, state-less contracts to reduce contract size and separate concern. Some changes mainly target Layer 2 network.
 
 ## Changeset
