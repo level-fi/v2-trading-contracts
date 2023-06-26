@@ -177,6 +177,10 @@ contract OrderManager is
         uint256 _minAmountOut,
         bytes calldata _extradata
     ) external payable nonReentrant {
+        if (address(orderHook) != address(0)) {
+            orderHook.preSwap(msg.sender, _extradata);
+        }
+
         (address outToken, address receiver) = _toToken == ETH ? (address(weth), address(this)) : (_toToken, msg.sender);
 
         address inToken;
@@ -195,10 +199,6 @@ contract OrderManager is
             _safeUnwrapETH(amountOut, msg.sender);
         }
         emit Swap(msg.sender, _fromToken, _toToken, address(pool), _amountIn, amountOut);
-
-        if (address(orderHook) != address(0)) {
-            orderHook.postSwap(msg.sender, _extradata);
-        }
     }
 
     function executeLeverageOrder(uint256 _orderId, address payable _feeTo) external nonReentrant {
